@@ -1,0 +1,53 @@
+/* Header section */
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .Search-bar{
+    display: flex;
+    flex-direction: row;
+    margin-right: 70px;
+    padding-top: 1%;
+  }
+  
+  .Engine input{
+    width: 156%;
+    padding-top: 15px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+  }
+  
+  .Magnify{
+    color: black;
+    font-size: 30px;
+    background-color: white;
+    width: 40px;
+    height: 52px;
+    border: 1px solid black;
+    margin-left:114px;
+  }
+  
+  .Magnify i{
+      margin-top: 10px;
+      margin-right: 10px;
+      margin-bottom:10px;
+      margin-left:10px;
+      margin-right:50px;
+      background-color: black; 
+    }
+  
+   .button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 1%;
+    gap: 10px;
+  
+  } 
+  
+
+  

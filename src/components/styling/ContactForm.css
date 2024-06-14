@@ -1,0 +1,31 @@
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.contact-container h2 {
+    color: #17a2b8; /* Bootstrap's primary color */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contact-container form {
+    margin-bottom: 20px;
+}
+
+.contact-container form label {
+    font-weight: bold;
+}
+
+.contact-container form .form-control {
+    margin-bottom: 15px;
+}
+
+.contact-container form button {
+    width: 100%;
+    margin-top: 15px;
+}

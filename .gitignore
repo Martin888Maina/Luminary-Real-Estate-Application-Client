@@ -1,23 +1,75 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependency directories
+node_modules/
+jspm_packages/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Optional npm cache directory
+.npm
+.yarn
+.pnpm-store/
 
-# testing
-/coverage
+# Optional eslint cache
+.eslintcache
 
-# production
-/build
+# Optional REPL history
+.node_repl_history
 
-# misc
-.DS_Store
+# Output directory for build
+build/
+dist/
+
+# Next.js build output
+.next/
+
+# Gatsby files
+.cache/
+public/
+
+# Dependency directories for Yarn 2
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# dotenv environment variables file
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store
+
+# MacOS file
+.DS_Store
+
+# Windows file
+Thumbs.db
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional runtime data
+.pnp.*
+
+# System files
+*.log
+*.gz
+*.zip
+*.swp
+*.bak
+*.pid

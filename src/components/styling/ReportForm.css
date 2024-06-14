@@ -1,0 +1,21 @@
+/* Styles for the container */
+.Report {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styles for the form */
+.Report form {
+    width: 70%;
+    margin-top: 20px;
+}
+
+.Report form .mt-3 {
+    margin-top: 20px;
+}
+
+.Report form .btn-danger {
+    margin-top: 20px;
+}
+
