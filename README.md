@@ -85,41 +85,41 @@ This feature allows the users with alerts regarding important actions or changes
 
 
 # Project Schedule
-![Gantt Chart](/images/Gantt/Schedule.png)
+![Gantt Chart](/images/Schedule.png)
 
 
 # Flow Diagram
 ## luminary system
 
 ## Resource
-![Flow Diagram](/images/Flow/Activity.png)
+![Flow Diagram](/images/Components.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Contact.png)
+![Flow Diagram](/images/Forms.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Stage.png)
+![Flow Diagram](/images/Listing.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Deal.png)
+![Flow Diagram](/images/Logout.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Invoice-Item.png)
+![Flow Diagram](/images/Owner.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Permission.png)
+![Flow Diagram](/images/Rent&Buy.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Organization.png)
+![Flow Diagram](/images/User.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Post.png)
+![Flow Diagram](/images/Admin.png)
 
 # Entity Relationship Diagram
-![Entity Diagram](/images/Entity/Complete-ERD.png)
+![Entity Diagram](/images/Relational.png)
 
 # Logical Diagram
-![Logical Diagram](/images/Entity/Complete-LOG.png)
+![Logical Diagram](/images/Logical.png)
 
 # Luminary Application
 
