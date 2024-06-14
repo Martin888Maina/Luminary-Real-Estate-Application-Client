@@ -1,4 +1,4 @@
-![School Logo](/images/IST.png)
+![School Logo](/src/images/IST.png)
 
 # INSTITUTE OF SOFTWARE TECHNOLOGIES
 
