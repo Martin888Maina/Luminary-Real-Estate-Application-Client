@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styling/LoginForm.css";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { useAuth } from "../context/AuthContext";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -16,6 +17,8 @@ const LoginForm = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+
+  const { updateAccessToken, redirectUrl, clearRedirectUrl } = useAuth();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -32,7 +35,6 @@ const LoginForm = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    const token = sessionStorage.getItem("access_token");
 
     if (!data.email.trim() || !data.password.trim()) {
       toast.error("Please fill out all fields.", {
@@ -53,7 +55,6 @@ const LoginForm = () => {
     axios
       .post("http://localhost:4000/Register/login", data, {
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
@@ -63,13 +64,18 @@ const LoginForm = () => {
 
           sessionStorage.setItem("access_token", accessToken);
           sessionStorage.setItem("refresh_token", refreshToken);
+          updateAccessToken(accessToken); // Update token in context
 
-          if (role === "admin") {
-            history.push("./AdminPanel"); // Redirect to admin dashboard
+          // Redirect to the saved URL or fallback to role-based pages
+          if (redirectUrl) {
+            history.push(redirectUrl);
+            clearRedirectUrl();
+          } else if (role === "admin") {
+            history.push("./AdminPanel");
           } else if (role === "user") {
-            history.push("/"); // Redirect to user dashboard
+            history.push("/");
           } else if (role === "owner") {
-            history.push("./OwnerDashboard"); // Redirect to owner dashboard
+            history.push("./OwnerDashboard");
           } else {
             console.error("Unexpected user role:", role);
           }
@@ -78,7 +84,7 @@ const LoginForm = () => {
             icon: 'success',
             title: 'Login Successful',
             text: 'User Login successful',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
           });
 
           setData({
@@ -88,9 +94,9 @@ const LoginForm = () => {
         }
       })
       .catch((err) => {
-        console.error("Error occurred while logging in:", err);
+        // console.error("Error occurred while logging in:", err);
 
-        toast.error("An Error occurred while Logging in.", {
+        toast.error("An error occurred while logging in.", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
@@ -124,7 +130,6 @@ const LoginForm = () => {
           <Form.Check
             type="checkbox"
             id="showPasswordCheckbox"
-            // label="Show Password"
             label={<span className="show-password-label">Show Password</span>}
             checked={showPassword}
             onChange={toggleShowPassword}
@@ -156,7 +161,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-
-
-

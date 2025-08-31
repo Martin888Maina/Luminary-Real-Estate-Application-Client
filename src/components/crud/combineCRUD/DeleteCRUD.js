@@ -48,7 +48,7 @@ const DeleteCRUD = () => {
         autoClose: 3000,
       });
     } catch (error) {
-      console.error("Error deleting record", error);
+      // console.error("Error deleting record", error);
       toast.error("Error deleting record", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,

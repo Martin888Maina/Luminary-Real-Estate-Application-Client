@@ -60,7 +60,7 @@ const UpdateReport = () => {
           });
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     };
 
@@ -85,7 +85,8 @@ const UpdateReport = () => {
 
       // window.location.href = '/mountain';
       //code to redirect user to the landing page after successfully submitting their report
-      history.push('/');
+      // history.push('/');
+      history.push('/components/crud/reportCRUD/DisplayReport');
 
     } catch (error) {
       toast.error('An Error occurred while Updating the Record.', {
@@ -160,7 +161,7 @@ const UpdateReport = () => {
                   Close
                 </Button>
 
-                <Button variant="warning" onclick={handleUpdate}>
+                <Button variant="warning" onClick={handleUpdate}>
                   Save Changes
                 </Button>
 

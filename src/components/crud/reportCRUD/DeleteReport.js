@@ -40,7 +40,7 @@ const DeleteReport = () => {
           });
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     };
 
@@ -64,7 +64,7 @@ const DeleteReport = () => {
 
       // window.location.href = '/mountain';
       //code to redirect the user to the landing page after successful deletion of report
-      history.push('/');
+      history.push('/components/crud/reportCRUD/DisplayReport');
       
     } catch (error) {
       toast.error('An Error occurred while Deleting the Record.', {
@@ -140,7 +140,7 @@ const DeleteReport = () => {
                   Close
                 </Button>
 
-                <Button variant="danger" onclick={handleDelete}>
+                <Button variant="danger" onClick={handleDelete}>
                   Save Changes
                 </Button>
 

@@ -31,7 +31,7 @@ const DetailCRUD = () => {
               },
         })
           .then(res => {
-            console.log('Data:', res.data); // Log the received data
+            // console.log('Data:', res.data); // Log the received data
             setCombines([res.data]);
               
           })

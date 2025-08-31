@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom'; // Import useHistory
+import { Spinner } from 'react-awesome-spinners'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext'; // Import useAuth hook
@@ -7,7 +8,7 @@ import { useAuth } from '../../../context/AuthContext'; // Import useAuth hook
 const RentCommercial = () => {
     const history = useHistory();
     const [listings, setListings] = useState([]);
-    const { isLoggedIn, accessToken } = useAuth();
+    const { isLoggedIn, accessToken, updateRedirectUrl } = useAuth();
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const listingsPerPage = 20;
@@ -31,37 +32,51 @@ const RentCommercial = () => {
             if (response.status === 200) {
                 setListings(response.data);
             } else {
-                console.error('Failed to fetch listings');
+                // console.error('Failed to fetch listings');
             }
         } catch (error) {
-            console.error('Error fetching listings:', error);
+            // console.error('Error fetching listings:', error);
         }
     };
 
     useEffect(() => {
-        console.log("Mountain component rendered. Is logged in:", isLoggedIn);
-        console.log("Access token:", accessToken);
+        // console.log("Mountain component rendered. Is logged in:", isLoggedIn);
+        // console.log("Access token:", accessToken);
       }, [isLoggedIn, accessToken]);
 
     if (loading) {
-        return <div className='display-1 mt-5 mb-5'>Loading...</div>;
+    return (
+        <div className="loading-overlay">
+        <div className="spinner-container">
+            {/* Use the Spinner effect from react-awesome-spinners */}
+            <Spinner size={120} color="#007bff" />  {/* Adjust size and color */}
+        </div>
+        </div>
+    );
     }
 
     const handleVerification = (combine_id, event) => {
         event.preventDefault();
-        console.log("Handling verification...");
+        // console.log("Handling verification...");
       
         // Directly check if the access token exists in sessionStorage
         const isLoggedIn =!!sessionStorage.getItem('access_token');
       
-        console.log("Is logged in:", isLoggedIn);
-        console.log("Access token:", sessionStorage.getItem('access_token'));
+        // console.log("Is logged in:", isLoggedIn);
+        // console.log("Access token:", sessionStorage.getItem('access_token'));
       
         if (!isLoggedIn) {
-          console.log("User not logged in, redirecting to login form");
+        //   console.log("User not logged in, redirecting to login form");
+
+
+          // Save the intended destination
+          const targetUrl = `/CombineId/${combine_id}`;
+          updateRedirectUrl(targetUrl); // Save redirect URL using context
+
+          
           history.push('/LoginForm');
         } else {
-          console.log("User is logged in, redirecting to the listing detail page");
+        //   console.log("User is logged in, redirecting to the listing detail page");
           history.push(`/CombineId/${combine_id}`);
         }
       };

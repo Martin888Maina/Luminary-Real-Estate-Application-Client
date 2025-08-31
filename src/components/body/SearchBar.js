@@ -7,31 +7,32 @@ import { useHistory } from "react-router-dom";
 
 const SearchBar = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [errorMessage, setErrorMessage] = useState(''); // State for error message
     const history = useHistory();
 
     // Handle input change
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
+        setErrorMessage(''); // Clear error message on change
     };
 
     // Handle form submit
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+       // Check if the search term is empty
+       if (searchTerm.trim() === '') {
+        alert('Please Enter Search Parameter'); // Show alert if search term is empty
+        return; // Prevent further action
+    } 
+
         try {
-            if (searchTerm.trim() !== '') { // Check if search term is not empty
-                // Make a GET request to the backend search endpoint with the search term
-                const response = await axios.get(`http://localhost:4000/Combine/searchCombine?searchTerm=${searchTerm}`);
-                history.push({
-                    pathname: '/Searchresult',
-                    state: { searchResults: response.data }
-                });
-            } else {
-                // If search term is empty, set searchResults to an empty array
-                history.push({
-                    pathname: '/Searchresult',
-                    state: { searchResults: [] }
-                });
-            }
+            // Make a GET request to the backend search endpoint with the search term
+            const response = await axios.get(`http://localhost:4000/Combine/searchCombine?searchTerm=${searchTerm}`);
+            history.push({
+                pathname: '/Searchresult',
+                state: { searchResults: response.data }
+            });
         } catch (error) {
             console.error('Error searching:', error);
         }
@@ -58,6 +59,9 @@ const SearchBar = ({ onSearch }) => {
                     </div>
                 </div>
             </form>
+
+            {/* Display error message in red */}
+            {errorMessage && <small style={{ color: 'red', marginTop: '5px' }}>{errorMessage}</small>}
         </div>
     );
 }

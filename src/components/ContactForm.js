@@ -30,7 +30,7 @@ const ContactForm = () => {
                 })));
             })
             .catch(err => {
-                console.error('Error fetching combines:', err);
+                // console.error('Error fetching combines:', err);
             });
     }, []);
 
@@ -114,6 +114,10 @@ const ContactForm = () => {
             }
         };
 
+        // Store email and selected combine ID in sessionStorage
+         sessionStorage.setItem('payment_email', data.email);
+         sessionStorage.setItem('payment_combine_id', data.selectedCombine);
+
         axios.post('http://localhost:4000/Notify/notifyListingOwner', postData, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -121,14 +125,14 @@ const ContactForm = () => {
             },
         })
         .then(res => {
-            console.log('Email notification sent successfully:', res.data);
+            // console.log('Email notification sent successfully:', res.data);
             toast.success('Email notification sent successfully.', {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
             });
         })
         .catch(err => {
-            console.error('Error sending email notification:', err);
+            // console.error('Error sending email notification:', err);
             toast.error('Failed to send email notification.', {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
@@ -143,14 +147,14 @@ const ContactForm = () => {
             },
         })
         .then(res => {
-            console.log('Contact saved successfully:', res.data);
+            // console.log('Contact saved successfully:', res.data);
             toast.success('Contact saved successfully.', {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
             });
         })
         .catch(err => {
-            console.error('Error saving contact:', err);
+            // console.error('Error saving contact:', err);
             toast.error('Failed to save contact.', {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,

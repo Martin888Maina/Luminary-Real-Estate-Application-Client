@@ -5,10 +5,25 @@ const SearchResultPage = ({ location }) => {
     const history = useHistory();
     const { searchResults } = location.state;
 
-    const handleVerification = (combine_id) => {
-        // Redirect to the Cart page with the selected combine_id
-        history.push(`/CombineId/${combine_id}`);
+    const handleVerification = (combine_id, event) => {
+        event.preventDefault(); // Prevent default link behavior
+        console.log("Handling verification...");
+    
+        // Directly check if the access token exists in sessionStorage
+        const isLoggedIn = !!sessionStorage.getItem('access_token');
+    
+        // console.log("Is logged in:", isLoggedIn);
+        // console.log("Access token:", sessionStorage.getItem('access_token'));
+    
+        if (!isLoggedIn) {
+            // console.log("User not logged in, redirecting to login form");
+            history.push('/LoginForm');
+        } else {
+            // console.log("User is logged in, redirecting to the listing detail page");
+            history.push(`/CombineId/${combine_id}`);
+        }
     };
+    
 
     // Function to chunk array into smaller arrays with a maximum length
     const chunkArray = (arr, chunkSize) => {
@@ -29,8 +44,19 @@ const SearchResultPage = ({ location }) => {
                     <div key={rowIndex} className="row justify-content-center mt-4">
                         {row.map((result, index) => (
                             <div key={index} className="card search-result p-2 col-lg-3 col-md-6 mb-4">
-                                <Link to="#" className="card-link" onClick={() => handleVerification(result.combine_id)} style={{ color: 'black',  textDecoration: 'none' }}>
-                                    <img src={result.file_url} className="card-img-top mx-auto" alt={result.location} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+
+                                <Link 
+                                    to="#" 
+                                    className="card-link" 
+                                    onClick={(event) => handleVerification(result.combine_id, event)} 
+                                    style={{ color: 'black', textDecoration: 'none' }}
+                                >
+                                    <img 
+                                        src={result.file_url} 
+                                        className="card-img-top mx-auto" 
+                                        alt={result.location} 
+                                        style={{ width: '100%', height: '200px', objectFit: 'cover' }} 
+                                    />
                                     <div className="card-body">
                                         <h5 className="card-title">Location: {result.location}</h5>
                                         <p className="card-text">Amount: {result.amount}</p>
@@ -40,6 +66,8 @@ const SearchResultPage = ({ location }) => {
                                         <p className="card-text">Listing ID: {result.combine_id}</p>
                                     </div>
                                 </Link>
+
+
                             </div>
                         ))}
                     </div>

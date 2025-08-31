@@ -40,7 +40,7 @@ const DeleteData = () => {
           });
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     };
 
@@ -63,7 +63,7 @@ const DeleteData = () => {
       });
 
       //code to redirect user to the landing page after successful deletion of contact.
-      history.push('/');
+      history.push('/DisplayData')
 
     } catch (error) {
       toast.error('An Error occurred while Deleting the Record.', {

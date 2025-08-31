@@ -40,7 +40,7 @@ const DeleteContact = () => {
           });
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     };
 
@@ -64,7 +64,7 @@ const DeleteContact = () => {
 
       // window.location.href = '/mountain';
       //code to redirect user to the Mountain landing page after successful deletion of contact.
-      history.push('/');
+      history.push('/components/crud/contactCRUD/DisplayContact');
 
     } catch (error) {
       toast.error('An Error occurred while Deleting the Record.', {
@@ -145,7 +145,7 @@ const DeleteContact = () => {
                   Close
                 </Button>
 
-                <Button variant="danger" onclick={handleDelete}>
+                <Button variant="danger" onClick={handleDelete}>
                   Save Changes
                 </Button>
 

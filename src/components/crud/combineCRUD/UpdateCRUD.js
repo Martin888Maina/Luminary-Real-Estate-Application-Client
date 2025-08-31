@@ -67,14 +67,14 @@ const UpdateExperiment = () => {
       }
     })
       .then((res) => {
-        console.log("Record updated successfully");
+        // console.log("Record updated successfully");
         toast.success('Record updated successfully', {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       })
       .catch((error) => {
-        console.error("Error updating record", error);
+        // console.error("Error updating record", error);
         toast.error("Error updating record", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,

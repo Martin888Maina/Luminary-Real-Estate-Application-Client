@@ -19,6 +19,9 @@ import DetailCRUD from './components/crud/combineCRUD/DetailCRUD';
 import UpdateCRUD from './components/crud/combineCRUD/UpdateCRUD';
 import DeleteCRUD  from './components/crud/combineCRUD/DeleteCRUD';
 
+// OWNER CRUD OPERATION
+import OwnerCRUD from './components/crud/combineCRUD/OwnerCRUD';
+
 // USER CRUD OPERATION
 import DeleteData  from './components/crud/registerCRUD/DeleteData';
 import DetailData  from './components/crud/registerCRUD/DetailData';
@@ -60,6 +63,12 @@ import Navcarousel from './components/body/NavCarousel';
 
 //SearchResultPage section
 import SearchResultPage from './components/body/SearchResultPage';
+
+//Transactions section
+import Transactions from './components/Transactions';
+
+//Owner Transactions section
+import OwnerTransactions from './components/OwnerTransactions';
 
 // Help center section
 import AccountManagement from './components/helpcenter/AccountManagement';
@@ -120,6 +129,9 @@ import UploadForm from './components/Owner/UploadForm';
 // Add to cart section
 import Cart from './components/user/Cart';
 
+// Generate Report section
+import GenerateReport from './components/GenerateReport';
+
 // Payment gateway
 import Paystack from './components/Paystack';
 
@@ -140,11 +152,11 @@ function App() {
 
                   <Route path="/ContactForm"                      component={ContactForm} />
 
-                  <Route path="/ReportForm"                      component={ReportForm} />
+                  <Route path="/ReportForm"                       component={ReportForm} />
 
                   {/* User section */}
                   {/* Landing page */}
-                  <Route exact path="/"                  component={Mountain} />
+                  <Route exact path="/"                           component={Mountain} />
 
                   <Route path="/Ocean"                            component={Ocean} />
 
@@ -177,8 +189,17 @@ function App() {
                   {/* Add to cart section */}
                   <Route path="/CombineId/:combine_id"            component={Cart} />
 
+                  {/* Generate Report section */}
+                  <Route path="/Generate-report/:combine_id"     component={GenerateReport } />
+
                   {/* Paystack page */}
                   <Route path="/Paystack"                         component={Paystack} />
+
+                  {/* Transaction page */}
+                  <Route path="/Transactions"                     component={Transactions} />
+
+                  {/* Owner Transaction page */}
+                  <Route path="/OwnerTransactions"                component={OwnerTransactions} />
 
                
                   {/* Buy section */}
@@ -215,6 +236,9 @@ function App() {
                   <Route path="/combineId/:combine_id"             component={DetailCRUD} />
 
                   <Route path="/updateCombine/:combine_id"         component={UpdateCRUD} />
+
+
+                  <Route path="/OwnerCRUD"                         component={OwnerCRUD} />
 
 
                   {/* Contact CRUD functionality */}

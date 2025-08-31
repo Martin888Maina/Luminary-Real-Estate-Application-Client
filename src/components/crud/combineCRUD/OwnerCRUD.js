@@ -2,57 +2,102 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 
-const DisplayContact = () => {
-  const [contacts, setContacts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+const OwnerCRUD = () => {
+  const [combines, setCombines] = useState([]);
+  const [filteredCombines, setFilteredCombines] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [searchTerm, setSearchTerm] = useState(''); 
   const [currentPage, setCurrentPage] = useState(1);
-  const listingsPerPage = 10; // Number of contacts per page
+  const listingsPerPage = 10; // Number of listings per page
+  const history = useHistory();
 
-  const retrieveData = () => {
+  useEffect(() => {
     const token = sessionStorage.getItem('access_token');
 
+    if (!token) {
+      toast.error('No access token found. Please log in.', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+      setLoading(false); 
+      return;
+    }
+
     axios
-      .get('http://localhost:4000/Contact/contact', {
+      .get('http://localhost:4000/Combine/myCombines', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       })
       .then((res) => {
-        toast.success('Contact Records Displayed Successfully', {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000,
-        });
-        setContacts(res.data);
-        setLoading(false);
+        const { combines: combineData } = res.data;
+
+        if (combineData && combineData.length > 0) {
+          const formattedCombines = combineData.map((item) => ({
+            ...item,
+            startDate: item.startDate.split('T')[0],
+            endDate: item.endDate.split('T')[0],
+          }));
+          setCombines(formattedCombines);
+          setFilteredCombines(formattedCombines); 
+
+          toast.success('Combine Records Displayed Successfully', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+        } else {
+          toast.error('No owner listing data found.', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+          });
+        }
+        setLoading(false); 
       })
       .catch((err) => {
-        toast.error('An error occurred while displaying the records.', {
+        toast.error('An Error occurred while displaying the Records.', {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
-        setLoading(false);
+        setLoading(false); 
       });
+  }, []);
+
+  const handleDetailsClick = (combineId) => {
+    history.push(`/combineId/${combineId}`);
   };
 
-  useEffect(() => {
-    retrieveData();
-  }, []); 
+  const handleUpdatesClick = (combineId) => {
+    history.push(`/updateCombine/${combineId}`);
+  };
 
-  // Filter contacts based on the search term
-  const filteredContacts = contacts.filter((contact) =>
-    `${contact.firstname} ${contact.lastname} ${contact.email} ${contact.telephone} ${contact.message}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
+  const handleDeletesClick = (combineId) => {
+    history.push(`/deleteCombine/${combineId}`);
+  };
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredContacts.length / listingsPerPage);
-  const paginatedContacts = filteredContacts.slice(
+  const handleSearchChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = combines.filter((item) =>
+      item.location.toLowerCase().includes(term) ||
+      item.startDate.toLowerCase().includes(term) ||
+      item.endDate.toLowerCase().includes(term) ||
+      item.amount.toString().toLowerCase().includes(term)
+    );
+    setFilteredCombines(filtered);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Slice data for pagination
+  const totalPages = Math.ceil(filteredCombines.length / listingsPerPage);
+  const paginatedCombines = filteredCombines.slice(
     (currentPage - 1) * listingsPerPage,
     currentPage * listingsPerPage
   );
@@ -79,70 +124,82 @@ const DisplayContact = () => {
     return pages;
   };
 
-  // Handle page change
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
   return (
     <div className="container">
-      {/* Search Bar */}
-      <div className="mb-3">
+      {/* Search Input */}
+      <div className="mt-3">
         <input
           type="text"
           className="form-control"
-          placeholder="Search by name, email, telephone, or message"
+          placeholder="Search by location, start date, end date, or amount"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleSearchChange}
         />
       </div>
 
-      {/* Conditionally render loading spinner or the table */}
+      {/* Conditionally render loading spinner while fetching data */}
       {loading ? (
         <div className="d-flex justify-content-center mt-5">
           <Spinner animation="border" variant="primary" />
         </div>
       ) : (
         <>
-          <table className="table table-borderless mt-5 mb-5" style={{ margin: 'auto' }}>
+          <table className="table table-borderless mt-3 mb-5" style={{ margin: 'auto' }}>
             <thead>
               <tr>
                 <th scope="col">Number</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Telephone</th>
-                <th scope="col">Message</th>
+                <th scope="col">Image</th>
+                <th scope="col">Location</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Amount</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedContacts.length > 0 ? (
-                paginatedContacts.map((contact, index) => (
-                  <tr key={contact.contact_id}>
+              {paginatedCombines.length > 0 ? (
+                paginatedCombines.map((item, index) => (
+                  <tr key={item.combine_id}>
                     <th scope="row">{(currentPage - 1) * listingsPerPage + index + 1}</th>
-                    <td>{contact.firstname}</td>
-                    <td>{contact.lastname}</td>
-                    <td>{contact.email}</td>
-                    <td>{contact.telephone}</td>
-                    <td>{contact.message}</td>
                     <td>
-                      <Link to={`/contactId/${contact.contact_id}`} className="btn btn-info mr-2">
+                      {item.file_url && (
+                        <img
+                          src={item.file_url}
+                          alt="Listing"
+                          style={{ width: '100px', height: '100px' }}
+                        />
+                      )}
+                    </td>
+                    <td>{item.location}</td>
+                    <td>{item.startDate}</td>
+                    <td>{item.endDate}</td>
+                    <td>{item.amount}</td>
+                    <td>
+                      <button
+                        onClick={() => handleDetailsClick(item.combine_id)}
+                        className="btn btn-info mr-2"
+                      >
                         Details
-                      </Link>
-                      <Link to={`/updateContact/${contact.contact_id}`} className="btn btn-warning mr-2">
+                      </button>
+                      <button
+                        onClick={() => handleUpdatesClick(item.combine_id)}
+                        className="btn btn-warning mr-2"
+                      >
                         Update
-                      </Link>
-                      <Link to={`/deleteContact/${contact.contact_id}`} className="btn btn-danger">
+                      </button>
+                      <button
+                        onClick={() => handleDeletesClick(item.combine_id)}
+                        className="btn btn-danger mr-2"
+                      >
                         Delete
-                      </Link>
+                      </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
                   <td colSpan="7" className="text-center">
-                    No contacts found
+                    No records found
                   </td>
                 </tr>
               )}
@@ -224,4 +281,4 @@ const DisplayContact = () => {
   );
 };
 
-export default DisplayContact;
+export default OwnerCRUD;

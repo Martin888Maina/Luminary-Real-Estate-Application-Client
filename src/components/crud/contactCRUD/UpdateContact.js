@@ -59,7 +59,7 @@ const UpdateContact = () => {
           });
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
       }
     };
 
@@ -84,7 +84,7 @@ const UpdateContact = () => {
 
       // window.location.href = '/mountain';
       //code to redirect user to the landing page Mountain after successful update of contact
-      history.push('/')
+      history.push('/components/crud/contactCRUD/DisplayContact');
 
     } catch (error) {
       toast.error('An Error occurred while Updating the Record.', {
@@ -166,7 +166,7 @@ const UpdateContact = () => {
                   Close
                 </Button>
 
-                <Button variant="warning" onclick={handleUpdate}>
+                <Button variant="warning" onClick={handleUpdate}>
                   Save Changes
                 </Button>
 

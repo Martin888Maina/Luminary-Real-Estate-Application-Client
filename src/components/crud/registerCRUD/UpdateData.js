@@ -80,8 +80,12 @@ const UpdateData = () => {
         autoClose: 3000,
       });
 
+      // Close the modal before redirecting
+      setShowModal(false);
+
       //code to redirect user to the landing page after successful update of contact
-      history.push('/')
+      // history.push('/')
+      history.push('/DisplayData')
 
     } catch (error) {
       toast.error('An Error occurred while Updating the Record.', {
@@ -171,3 +175,8 @@ const UpdateData = () => {
 
 
 export default UpdateData;
+
+
+
+
+

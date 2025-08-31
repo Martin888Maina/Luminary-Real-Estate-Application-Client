@@ -14,7 +14,7 @@ const Header =()=>{
 
     // Callback function to handle search results
     const handleSearch = (results) => {
-        console.log('Search results:', results); 
+        // console.log('Search results:', results); 
         setSearchResults(results);
 
         if (results.length > 0) {

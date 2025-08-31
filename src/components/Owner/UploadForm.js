@@ -13,7 +13,7 @@ const UploadForm = () => {
         endDate: "",
         amount: "",
         image: "",
-        category:"",
+        category: "",
         picture: null,
         document: null
     });
@@ -24,7 +24,7 @@ const UploadForm = () => {
             ...prevData,
             [name]: value
         }));
-    }
+    };
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -34,10 +34,76 @@ const UploadForm = () => {
             ...prevData,
             [name]: file
         }));
-    }
+    };
+
+    const validateForm = () => {
+        // Validate Location (alphabetic characters only)
+        const locationRegex = /^[a-zA-Z\s]+$/;
+        if (!locationRegex.test(data.location)) {
+            toast.error('Location should only contain alphabetic characters and spaces.', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+            });
+            return false;
+        }
+
+        // Validate Category (alphabetic characters only)
+        if (!locationRegex.test(data.category)) {
+            toast.error('Category should only contain alphabetic characters and spaces.', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+            });
+            return false;
+        }
+
+        // Validate Amount (numeric value)
+        if (isNaN(data.amount) || data.amount <= 0) {
+            toast.error('Amount should be a positive number.', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+            });
+            return false;
+        }
+
+        
+        const today = new Date();
+        const startDate = new Date(data.startDate);
+        const endDate = new Date(data.endDate);
+
+        // Normalize time for comparison (to ignore the time part of the Date objects)
+        today.setHours(0, 0, 0, 0); // Sets time to midnight for today's date
+        startDate.setHours(0, 0, 0, 0); // Sets time to midnight for startDate
+        endDate.setHours(0, 0, 0, 0); // Sets time to midnight for endDate
+
+        // Check if the start date is in the past (excluding today's date)
+        if (startDate < today) {
+            toast.error('Start date cannot be in the past.', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+            });
+            return false;
+        }
+
+        // Check if the end date is before the start date
+        if (endDate < startDate) {
+            toast.error('End date must be after or equal to the start date.', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000
+            });
+            return false;
+        }
+
+        // All validations passed
+        return true;
+    };
 
     const submitUpload = (e) => {
         e.preventDefault();
+
+        // Validate form data
+        if (!validateForm()) {
+            return;
+        }
 
         const token = sessionStorage.getItem("access_token");
 
@@ -51,7 +117,6 @@ const UploadForm = () => {
 
         const decodedToken = jwtDecode(token);
         const owner_id = decodedToken.aud;
-        console.log(owner_id);
 
         const formDataToSend = {
             location: data.location,
@@ -60,13 +125,10 @@ const UploadForm = () => {
             amount: data.amount,
             image: data.image,
             category: data.category,
-            picture:data.picture,
-            document:data.document,
+            picture: data.picture,
+            document: data.document,
             owner_id: owner_id
         };
-
-        // Log formDataToSend
-        console.log("FormDataToSend:", formDataToSend);
 
         axios.post('http://localhost:4000/Notify/notifyListingUpload', formDataToSend, {
             headers: {
@@ -96,7 +158,6 @@ const UploadForm = () => {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json', 
-                
             }
         })
         .then(res => {
@@ -116,9 +177,7 @@ const UploadForm = () => {
                 autoClose: 3000
             });
         });
-
-
-    }
+    };
 
     return (
         <div className="upload-container mt-5 mb-5">
@@ -159,16 +218,16 @@ const UploadForm = () => {
                     <Form.Control type="text" name="category" onChange={handleChange} placeholder="Please Enter the Listing Category" required/>
                 </Form.Group>
 
-                  {/* Image file */}
+                {/* Image file */}
                 <Form.Group className="mt-3">
-                     <Form.Label>Picture:</Form.Label>
-                    <Form.Control type="file" name="picture" onChange={handleFileChange}  placeholder ="Please Enter the Image"   accept=".jpeg, .jpg, .png" />
+                    <Form.Label>Picture:</Form.Label>
+                    <Form.Control type="file" name="picture" onChange={handleFileChange}  placeholder="Please Enter the Image"   accept=".jpeg, .jpg, .png" />
                 </Form.Group>
 
                 {/* Document file section */}
                 <Form.Group className="mt-3">
                     <Form.Label>Document:</Form.Label>
-                    <Form.Control type="file" name="document" onChange={handleFileChange} placeholder ="Please Enter the Document" accept=".pdf,.doc,.docx" />
+                    <Form.Control type="file" name="document" onChange={handleFileChange} placeholder="Please Enter the Document" accept=".pdf,.doc,.docx" />
                 </Form.Group>
 
                 <Button variant="success" type="submit" className="mt-3">Send</Button>
@@ -179,6 +238,3 @@ const UploadForm = () => {
 }
 
 export default UploadForm;
-
-
-
