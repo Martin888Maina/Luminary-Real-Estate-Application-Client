@@ -78,3 +78,6 @@ const SearchResultPage = ({ location }) => {
 };
 
 export default SearchResultPage;
+
+
+

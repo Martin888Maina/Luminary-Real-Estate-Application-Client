@@ -111,7 +111,7 @@ const RegisterForm = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 position-relative">
           <Form.Control
             type={showPassword ? "text" : "password"}
             name="password"
@@ -120,18 +120,23 @@ const RegisterForm = () => {
             placeholder="Password"
             required
           />
-          <Form.Check
-            type="checkbox"
-            id="showPasswordCheckbox"
-            // label="Show Password"
-            label={<span className="show-password-label">Show Password</span>}
-            checked={showPassword}
-            onChange={toggleShowPassword}
-            className="toggle-password-checkbox"
-          />
+          <span
+            className="password-toggle-icon"
+            onClick={toggleShowPassword}
+            style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+              fontSize: '1.2rem',
+            }}
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </span>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 position-relative">
           <Form.Control
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
@@ -140,14 +145,20 @@ const RegisterForm = () => {
             placeholder="Confirm Password"
             required
           />
-          <Form.Check
-            type="checkbox"
-            id="showConfirmPasswordCheckbox"
-            label={<span className="show-password-label">Show Password</span>}
-            checked={showConfirmPassword}
-            onChange={toggleShowConfirmPassword}
-            className="toggle-password-checkbox"
-          />
+          <span
+            className="password-toggle-icon"
+            onClick={toggleShowConfirmPassword}
+            style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+              fontSize: '1.2rem',
+            }}
+          >
+            {showConfirmPassword ? '🙈' : '👁️'}
+          </span>
         </Form.Group>
 
         <Button variant="success" type="submit">
@@ -168,7 +179,6 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
-
 
 
 

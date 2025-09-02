@@ -118,7 +118,7 @@ const LoginForm = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 position-relative">
           <Form.Control
             type={showPassword ? "text" : "password"}
             name="password"
@@ -127,14 +127,20 @@ const LoginForm = () => {
             placeholder="Password"
             required
           />
-          <Form.Check
-            type="checkbox"
-            id="showPasswordCheckbox"
-            label={<span className="show-password-label">Show Password</span>}
-            checked={showPassword}
-            onChange={toggleShowPassword}
-            className="toggle-password-checkbox"
-          />
+          <span
+            className="password-toggle-icon"
+            onClick={toggleShowPassword}
+            style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+              fontSize: '1.2rem',
+            }}
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </span>
         </Form.Group>
 
         <Button variant="success" type="submit">
@@ -161,3 +167,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+

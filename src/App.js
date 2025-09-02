@@ -3,7 +3,8 @@ import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-// import ProtectedRoute from './context/ProtectedRoutes';
+import ProtectedRoute from './utils/ProtectedRoutes';
+import setupAxiosInterceptor from './utils/AxiosInterceptor';
 
 import LoginForm from './components/LoginForm';
 import ContactForm from './components/ContactForm';
@@ -135,7 +136,7 @@ import GenerateReport from './components/GenerateReport';
 // Payment gateway
 import Paystack from './components/Paystack';
 
-
+setupAxiosInterceptor();
 
 function App() {
   return (
@@ -146,6 +147,7 @@ function App() {
           <NavCarousel/>
             <Switch>  
                   {/* Forms */}
+                  {/* Public routes */}
                   <Route path="/RegisterForm"                     component={RegisterForm} />
 
                   <Route path="/LoginForm"                        component={LoginForm} />
@@ -186,59 +188,60 @@ function App() {
 
                   <Route path="/Island"                           component={Island} />
 
+
                   {/* Add to cart section */}
-                  <Route path="/CombineId/:combine_id"            component={Cart} />
+                  <ProtectedRoute path="/CombineId/:combine_id"            component={Cart} />
 
                   {/* Generate Report section */}
-                  <Route path="/Generate-report/:combine_id"     component={GenerateReport } />
+                  <ProtectedRoute path="/Generate-report/:combine_id"     component={GenerateReport } />
 
                   {/* Paystack page */}
-                  <Route path="/Paystack"                         component={Paystack} />
+                  <ProtectedRoute path="/Paystack"                         component={Paystack} />
 
                   {/* Transaction page */}
-                  <Route path="/Transactions"                     component={Transactions} />
+                  <ProtectedRoute path="/Transactions"                     component={Transactions} />
 
                   {/* Owner Transaction page */}
-                  <Route path="/OwnerTransactions"                component={OwnerTransactions} />
+                  <ProtectedRoute path="/OwnerTransactions"                component={OwnerTransactions} />
 
                
                   {/* Buy section */}
-                  <Route path="/BuyCommercial"                     component={BuyCommercial} />
+                  <ProtectedRoute path="/BuyCommercial"                     component={BuyCommercial} />
 
-                  <Route path="/BuyResidential"                    component={BuyResidential} />
+                  <ProtectedRoute path="/BuyResidential"                    component={BuyResidential} />
 
-                  <Route path="/BuyLand"                           component={BuyLand} />
+                  <ProtectedRoute path="/BuyLand"                           component={BuyLand} />
 
                   {/* Rent section */}
 
-                  <Route path="/RentCommercial"                     component={RentCommercial} />
+                  <ProtectedRoute path="/RentCommercial"                     component={RentCommercial} />
 
-                  <Route path="/RentResidential"                    component={RentResidential} />
+                  <ProtectedRoute path="/RentResidential"                    component={RentResidential} />
 
-                  <Route path="/RentLand"                           component={RentLand} />
+                  <ProtectedRoute path="/RentLand"                           component={RentLand} />
 
                  
                   {/* CRUD operations */}
-                  <Route path="/DisplayData"                       component={DisplayData} />
+                  <ProtectedRoute path="/DisplayData"                       component={DisplayData} />
 
-                  <Route path="/deleteUsers/:id"                   component={DeleteData} />
+                  <ProtectedRoute path="/deleteUsers/:id"                   component={DeleteData} />
 
-                  <Route path="/userId/:id"                        component={DetailData} />
+                  <ProtectedRoute path="/userId/:id"                        component={DetailData} />
 
-                  <Route path="/updateUsers/:id"                   component={UpdateData} />
+                  <ProtectedRoute path="/updateUsers/:id"                   component={UpdateData} />
 
 
                   {/* COMBINE CRUD operations */}
-                  <Route path="/DisplayCRUD"                       component={DisplayCRUD} />
+                  <ProtectedRoute path="/DisplayCRUD"                       component={DisplayCRUD} />
 
-                  <Route path="/deleteCombine/:combine_id"         component={DeleteCRUD} />
+                  <ProtectedRoute path="/deleteCombine/:combine_id"         component={DeleteCRUD} />
 
-                  <Route path="/combineId/:combine_id"             component={DetailCRUD} />
+                  <ProtectedRoute path="/combineId/:combine_id"             component={DetailCRUD} />
 
-                  <Route path="/updateCombine/:combine_id"         component={UpdateCRUD} />
+                  <ProtectedRoute path="/updateCombine/:combine_id"         component={UpdateCRUD} />
 
 
-                  <Route path="/OwnerCRUD"                         component={OwnerCRUD} />
+                  <ProtectedRoute path="/OwnerCRUD"                         component={OwnerCRUD} />
 
 
                   {/* Contact CRUD functionality */}
@@ -246,30 +249,30 @@ function App() {
                   <Route path="/components/ContactForm"                              component={ContactForm} />
                   
                   {/* Display contact section */}
-                  <Route path="/components/crud/contactCRUD/DisplayContact"         component={DisplayContact} />
+                  <ProtectedRoute path="/components/crud/contactCRUD/DisplayContact"         component={DisplayContact} />
 
                   {/* Detail contact section  */}
-                  <Route path="/contactId/:contact_id"                              component={DetailContact} />
+                  <ProtectedRoute path="/contactId/:contact_id"                              component={DetailContact} />
 
                   {/* Update contact section*/}
-                  <Route path="/updateContact/:contact_id"                          component={UpdateContact} />
+                  <ProtectedRoute path="/updateContact/:contact_id"                          component={UpdateContact} />
 
                   {/* Delete contact section */}
-                  <Route path="/deleteContact/:contact_id"                          component={DeleteContact} />
+                  <ProtectedRoute path="/deleteContact/:contact_id"                          component={DeleteContact} />
 
 
                   {/* REPORT SECTION */}
                   {/* Display report section */}
-                  <Route path="/components/crud/reportCRUD/DisplayReport"         component={DisplayReport} />
+                  <ProtectedRoute path="/components/crud/reportCRUD/DisplayReport"         component={DisplayReport} />
 
                   {/* Detail report section  */}
-                  <Route path="/reportId/:report_id"                              component={DetailReport} />
+                  <ProtectedRoute path="/reportId/:report_id"                              component={DetailReport} />
 
                   {/* Update report section*/}
-                  <Route path="/updateReport/:report_id"                          component={UpdateReport} />
+                  <ProtectedRoute path="/updateReport/:report_id"                          component={UpdateReport} />
 
                   {/* Delete report section */}
-                  <Route path="/deleteReport/:report_id"                          component={DeleteReport} />
+                  <ProtectedRoute path="/deleteReport/:report_id"                          component={DeleteReport} />
 
                   {/* Additional functionalities */}
                   <Route path="/ForgotPassword"                     component={ForgotPassword} />
@@ -337,12 +340,12 @@ function App() {
 
                   {/* Owner dashboard section */}
                   {/* Owner Upload form section */}
-                  <Route path ="/UploadForm"                        component={UploadForm} />
+                  <ProtectedRoute path ="/UploadForm"                        component={UploadForm} />
                   {/* Owner dashboard */}
-                  <Route path ="/OwnerDashboard"                    component={OwnerDashboard} />
+                  <ProtectedRoute path ="/OwnerDashboard"                    component={OwnerDashboard} />
 
                   {/* Admin Dashboard section */}
-                  <Route path ="/AdminPanel"                        component={AdminPanel} />
+                  <ProtectedRoute path ="/AdminPanel"                        component={AdminPanel} />
 
 
                   {/* Not found page */}

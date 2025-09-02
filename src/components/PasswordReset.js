@@ -98,8 +98,7 @@ const PasswordReset = () => {
     <div className="password-reset-container">
       <h2>Password Reset</h2>
       <Form onSubmit={handleResetPassword} className="password-reset-form">
-        <Form.Group className="mb-3">
-        {/* <Form.Label>New Password:</Form.Label> */}
+        <Form.Group className="mb-3 position-relative">
           <Form.Control
             type={showPassword ? "text" : "password"}
             name="newPassword"
@@ -108,19 +107,23 @@ const PasswordReset = () => {
             placeholder="Enter your new password"
             required
           />
-          <Form.Check
-            type="checkbox"
-            id="showPasswordCheckbox"
-            // label="Show Password"
-            label={<span className="show-password-label">Show Password</span>}
-            checked={showPassword}
-            onChange={toggleShowPassword}
-            className="toggle-password-checkbox"
-          />
+          <span
+            className="password-toggle-icon"
+            onClick={toggleShowPassword}
+            style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+              fontSize: '1.2rem',
+            }}
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </span>
         </Form.Group>
 
-        <Form.Group className="mt-3">
-          {/* <Form.Label>Confirm Password:</Form.Label> */}
+        <Form.Group className="mt-3 position-relative">
           <Form.Control
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
@@ -129,15 +132,20 @@ const PasswordReset = () => {
             placeholder="Confirm your new password"
             required
           />
-          <Form.Check
-            type="checkbox"
-            id="showConfirmPasswordCheckbox"
-            // label="Show Confirm Password"
-            label={<span className="show-password-label">Show Password</span>}
-            checked={showConfirmPassword}
-            onChange={toggleShowConfirmPassword}
-            className="toggle-password-checkbox"
-          />
+          <span
+            className="password-toggle-icon"
+            onClick={toggleShowConfirmPassword}
+            style={{
+              position: 'absolute',
+              right: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+              fontSize: '1.2rem',
+            }}
+          >
+            {showConfirmPassword ? '🙈' : '👁️'}
+          </span>
         </Form.Group>
 
         <Button variant="primary" type="submit" className="mt-3">
@@ -157,7 +165,6 @@ const PasswordReset = () => {
 };
 
 export default PasswordReset;
-
 
 
 

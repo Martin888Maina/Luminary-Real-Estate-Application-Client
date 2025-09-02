@@ -1,7 +1,3 @@
-/* body {
-    background-color: plum; 
-} */
-
 .login-container {
     max-width: 500px;
     margin: 0 auto;
@@ -49,11 +45,11 @@
     font-weight: bold;
 }
 
-.show-password-label {
+.password-toggle-icon {
     cursor: pointer;
     transition: color 0.3s ease;
-  }
-  
-  .show-password-label:hover {
-    color: blue; /* Change color to your preferred hover color */
-  }
+}
+
+.password-toggle-icon:hover {
+    color: blue;
+}

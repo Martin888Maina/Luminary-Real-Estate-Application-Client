@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styling/ForgotPassword.css'; 
 import Swal from 'sweetalert2';
@@ -66,21 +65,12 @@ const ForgotPassword = () => {
             Proceed to Login page
           </Link>
         </div>
-
-        <div className="link-section mt-5">
-          <p>Want to proceed to the Password Reset Page?</p>
-          <Link to="./PasswordReset" className="password-reset">
-            Proceed to Password Reset page
-          </Link>
-        </div>
       </Form>
-      {/* <ToastContainer /> */}
     </div>
   );
 };
 
 export default ForgotPassword;
-
 
 
 

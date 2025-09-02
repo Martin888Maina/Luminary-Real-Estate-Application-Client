@@ -51,7 +51,7 @@ const Header =()=>{
                                     </Button>
                                 
                             </Link>
-                            
+                        
                         {/* Register Button */}
                             <Link to="/RegisterForm">
                                     <Button type="button" style={{marginLeft: "10px", cursor:"pointer"}}  className="btn btn-primary btn-lg">
@@ -65,37 +65,6 @@ const Header =()=>{
                                         Logout    
                                 </Button>
                         </Link> 
-
-                        {/* Contact Button */}
-                        {/* <Link to="/ContactForm">
-                                <Button type="button" style={{marginLeft: "10px", cursor:"pointer"}}  className="btn btn-primary btn-lg">
-                                        Contact   
-                                </Button>
-                        </Link>   */}
-
-
-                         {/* Upload Button */}
-                         {/* <Link to="/UploadForm">
-                                <Button type="button" style={{marginLeft: "10px", cursor:"pointer"}}  className="btn btn-primary btn-lg">
-                                        Upload  
-                                </Button>
-                        </Link>  */}
-
-
-                        {/* Admin Button */}
-                        {/* <Link to="/DisplayCRUD">
-                                <Button type="button" style={{marginLeft: "10px", cursor:"pointer"}}  className="btn btn-primary btn-lg">
-                                        Admin 
-                                </Button>
-                        </Link>  */}
-
-                        {/* User Button */}
-                        {/* <Link to="/DisplayData">
-                                <Button type="button" style={{marginLeft: "10px", cursor:"pointer"}}  className="btn btn-primary btn-lg">
-                                        User
-                                </Button>
-                        </Link>  */}
-                  
                     </div>
 
 
@@ -111,7 +80,6 @@ const Header =()=>{
 }
 
 export default Header;
-
 
 
 
