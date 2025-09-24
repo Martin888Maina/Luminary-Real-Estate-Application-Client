@@ -1,4 +1,4 @@
-![School Logo](/images/IST.png)
+![School Logo](/src/images/IST.png)
 
 # INSTITUTE OF SOFTWARE TECHNOLOGIES
 
@@ -85,41 +85,38 @@ This feature allows the users with alerts regarding important actions or changes
 
 
 # Project Schedule
-![Gantt Chart](/images/Gantt/Schedule.png)
+![Gantt Chart](/src/images/Schedule.png)
 
 
 # Flow Diagram
 ## luminary system
 
 ## Resource
-![Flow Diagram](/images/Flow/Activity.png)
+![Flow Diagram](/src/images/Admin.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Contact.png)
+![Flow Diagram](/src/images/Components.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Stage.png)
+![Flow Diagram](/src/images/Forms.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Deal.png)
+![Flow Diagram](/src/images/Listing.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Invoice-Item.png)
+![Flow Diagram](/src/images/Owner.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Permission.png)
+![Flow Diagram](/src/images/User.png)
 
 ## Resource
-![Flow Diagram](/images/Flow/Organization.png)
-
-## Resource
-![Flow Diagram](/images/Flow/Post.png)
+![Flow Diagram](/src/images/Logout.png)
 
 # Entity Relationship Diagram
-![Entity Diagram](/images/Entity/Complete-ERD.png)
+![Entity Diagram](/src/images/Relational.png)
 
 # Logical Diagram
-![Logical Diagram](/images/Entity/Complete-LOG.png)
+![Logical Diagram](/src/images/Logical.png)
 
 # Luminary Application
 
