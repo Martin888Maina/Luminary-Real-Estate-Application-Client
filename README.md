@@ -110,7 +110,7 @@ This feature allows the users with alerts regarding important actions or changes
 ![Flow Diagram](/src/images/User.png)
 
 ## Resource
-![Flow Diagram](/src/images/Logout.png)
+![Flow Diagram](/src/images/logout.png)
 
 # Entity Relationship Diagram
 ![Entity Diagram](/src/images/Relational.png)
